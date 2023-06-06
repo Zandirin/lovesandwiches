@@ -30,6 +30,8 @@ def get_sales_data():
             print("Data is valid!")
             break
 
+    return sales_data
+
 def data_validation(values):
     """
     Checks that data input is the correct type
@@ -45,4 +47,15 @@ def data_validation(values):
         return False
     return True
 
-get_sales_data()
+def update_sales_worksheet(data):
+    """
+    update worksheet with valid data input by the user.
+    """
+    print("Updating sales worksheet...\n")
+    sales_worksheet = SHEET.worksheet('sales')
+    sales_worksheet.append_row(data)
+    print("Sales worksheet updated successfully!\n")
+
+data = get_sales_data()
+sales_data = [int(num) for num in data]
+update_sales_worksheet(sales_data)
