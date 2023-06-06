@@ -49,6 +49,9 @@ def data_validation(values):
     return True
 
 def update_worksheet(data, worksheet):
+    """
+    updates worksheet and adds a row based on data input by user
+    """
     print(f"Updating {worksheet} worksheet...\n")
     updated_worksheet = SHEET.worksheet(worksheet)
     updated_worksheet.append_row(data)
@@ -72,6 +75,19 @@ def calculate_surplus_data(sales_row):
     
     return surplus_data
 
+def get_last_5_sales_entries():
+    """
+    Gets the last 5 entries of data from each column in the sales sheet
+    """
+    sales = SHEET.worksheet('sales')
+
+    columns = []
+    for ind in range(1, 7):
+        column = sales.col_values(ind)
+        columns.append(column[-5:])
+    
+    return columns
+
 def main():
     """
     Main function of the program, calls all other functions and runs them to update the spreadsheet.
@@ -83,4 +99,6 @@ def main():
     update_worksheet(new_surplus_data, 'surplus')
 
 print("Welcome to Love Sandwiches Data Automation")
-main()
+# main()
+
+sales_columns = get_last_5_sales_entries()
