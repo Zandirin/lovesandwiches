@@ -30,6 +30,7 @@ def data_validation(values):
     Checks that data input is the correct type
     """
     try:
+        [int(value) for value in values]
         if len(values) != 6:
             raise ValueError(
                 f"Require 6 values to be input, you provided {len(values)}"
